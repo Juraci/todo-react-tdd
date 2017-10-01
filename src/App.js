@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import TodoForm from './components/TodoForm';
 import './App.css';
 
 class App extends Component {
@@ -34,10 +35,11 @@ class App extends Component {
           <h1 className='App-title'>React Todos</h1>
         </header>
         <div className='Todo-App'>
-          <form onSubmit={this.handleSubmit}>
-            <input className='todo-description' type='text' value={this.state.currentTodo} onChange={this.handleInputChange}/>
-            <input id='add-task' type='submit' value='Add'/>
-          </form>
+          <TodoForm
+            handleSubmit={this.handleSubmit}
+            currnetTodo={this.state.currentTodo}
+            handleInputChange={this.handleInputChange}
+          />
           <div className='Todo-List'>
             <ul>
               {this.state.todos.map(todo =>
