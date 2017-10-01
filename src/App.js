@@ -3,6 +3,29 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      todos: [],
+      currentTodo: '',
+    };
+  }
+
+  handleInputChange = (evt) => {
+    this.setState({currentTodo: evt.target.value});
+  }
+
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+    const currentTodos = this.state.todos;
+    const newState = currentTodos.concat({
+      id: currentTodos.length === 0 ? 0 : currentTodos[currentTodos.length -1].id + 1,
+      description: this.state.currentTodo,
+      isComplete: false,
+    });
+    this.setState({todos: newState, currentTodo: ''});
+  }
+
   render() {
     return (
       <div className='App'>
@@ -11,13 +34,16 @@ class App extends Component {
           <h1 className='App-title'>React Todos</h1>
         </header>
         <div className='Todo-App'>
-          <form>
-            <input className='todo-description' type='text'/>
+          <form onSubmit={this.handleSubmit}>
+            <input className='todo-description' type='text' value={this.state.currentTodo} onChange={this.handleInputChange}/>
             <input id='add-task' type='submit' value='Add'/>
           </form>
           <div className='Todo-List'>
             <ul>
-              <li className='Todo-Item' state='todo'><input type='checkbox'/>Learn JSX</li>
+              {this.state.todos.map(todo =>
+                <li className='Todo-Item' key={todo.id}>
+                  <input type='checkbox' defaultChecked={todo.isComplete}/>{todo.description}
+               </li>)}
             </ul>
           </div>
         </div>
