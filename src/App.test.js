@@ -23,15 +23,19 @@ it('allows for task creation', () => {
   const wrapper = mount(<App/>);
   const input = wrapper.find('.todo-description');
   input.simulate('change', { target: { value: 'Learn JSX'}});
-  wrapper.find('form').simulate('submit');
-  expect(wrapper.find('.Todo-Item').length).toBe(1);
-  expect(wrapper.find('.Todo-Item').first().text()).toEqual('Learn JSX');
+  wrapper.find('input[type="submit"]').simulate('submit');
+  return wait().then(() => {
+    console.log(`>>>> ${wrapper.state('todos').length}`);
+    console.log(`>>>> ${wrapper.find('.Todo-List').html()}`);
+    expect(wrapper.state('todos').length).toBe(1);
+    //expect(wrapper.find('.Todo-List .Todo-Item').length).toEqual(1);
+  });
 });
 
 it('allows for task completion', () => {
   const wrapper = mount(<App/>);
   wrapper.find('.todo-description').simulate('input', { target: { value: 'Learn JSX' } });
-  wrapper.find('form').simulate('submit');
+  wrapper.find('input[type="submit"]').simulate('submit');
   expect(wrapper.find('.Todo-Item').length).toBe(1);
   wrapper.find('.Todo-Item input[type="checkbox"]').simulate('click');
   expect(wrapper.find('.Todo-Item').prop('isComplete')).toBe(true);
