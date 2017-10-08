@@ -44,8 +44,8 @@ class App extends Component {
           <TodoList todos={this.state.todos}/>
         </div>
       </div>
-      );
-    }
+    );
   }
+}
 
-  export default App;
+export default App;
