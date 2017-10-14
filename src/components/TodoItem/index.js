@@ -1,8 +1,9 @@
 import React from 'react';
+import { Todo } from '../../types';
 
-const TodoItem = (props) => (
+const TodoItem = ({ todo }: Todo) => (
   <li className='Todo-Item'>
-    <input type='checkbox' defaultChecked={props.todo.isComplete}/>{props.todo.description}
+    <input type='checkbox' defaultChecked={todo.isComplete}/>{todo.description}
   </li>
 );
 

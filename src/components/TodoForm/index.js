@@ -1,10 +1,11 @@
 // @flow
 
 import React from 'react';
+import { EventHandler } from '../../types';
 
 type Props = {
   handleSubmit: () => void,
-  handleInputChange: () => void,
+  handleInputChange: EventHandler,
   currentTodo: string,
 };
 

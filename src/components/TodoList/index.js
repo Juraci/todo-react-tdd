@@ -1,10 +1,13 @@
+// @flow
+
 import React from 'react';
 import TodoItem from '../TodoItem';
+import { TodoCollection } from '../../types';
 
-const TodoList = (props) => (
+const TodoList = ({ todos }: TodoCollection) => (
   <div className='Todo-List'>
     <ul>
-      {props.todos.map(todo => <TodoItem key={todo.id} todo={todo}/>)}
+      {todos.map(todo => <TodoItem key={todo.id} todo={todo}/>)}
     </ul>
   </div>
 );
