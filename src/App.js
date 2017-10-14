@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       todos: [],
       currentTodo: '',
+      errorMessage: '',
     };
   }
 
@@ -28,10 +29,18 @@ class App extends Component {
     };
 
     const newState = addTodo(currentTodos, newTodo);
-    this.setState({todos: newState, currentTodo: ''});
+    this.setState({todos: newState, currentTodo: '', errorMessage: ''});
+  }
+
+  handleEmptySubmit = (evt) => {
+    evt.preventDefault();
+    this.setState({ errorMessage: 'Description is required'});
   }
 
   render() {
+    const submitHandler = this.state.currentTodo ? this.handleSubmit : this.handleEmptySubmit;
+    const errorNode = this.state.errorMessage ? <div className='error'>{this.state.errorMessage}</div> : null;
+
     return (
       <div className='App'>
         <header className='App-header'>
@@ -40,10 +49,11 @@ class App extends Component {
         </header>
         <div className='Todo-App'>
           <TodoForm
-            handleSubmit={this.handleSubmit}
+            handleSubmit={submitHandler}
             currentTodo={this.state.currentTodo}
             handleInputChange={this.handleInputChange}
           />
+          {errorNode}
           <TodoList todos={this.state.todos}/>
         </div>
       </div>
