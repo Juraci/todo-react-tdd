@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
+import { addTodo } from './lib/todoHelpers';
 
 class App extends Component {
   constructor() {
@@ -20,11 +21,13 @@ class App extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     const currentTodos = this.state.todos;
-    const newState = currentTodos.concat({
+    const newTodo = {
       id: currentTodos.length === 0 ? 0 : currentTodos[currentTodos.length -1].id + 1,
       description: this.state.currentTodo,
       isComplete: false,
-    });
+    };
+
+    const newState = addTodo(currentTodos, newTodo);
     this.setState({todos: newState, currentTodo: ''});
   }
 
