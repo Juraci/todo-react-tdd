@@ -8,7 +8,7 @@ type Props = {
 
 const TodoItem = ({ todo, handleToggleTodo }: Props) => (
   <li>
-    <input onClick={handleToggleTodo(todo.id)} type='checkbox' defaultChecked={todo.isComplete}/>{todo.description}
+    <input onClick={handleToggleTodo(todo.id)} type='checkbox' checked={todo.isComplete}/>{todo.description}
   </li>
 );
 
