@@ -1,9 +1,14 @@
 import React from 'react';
 import { Todo } from '../../types';
 
-const TodoItem = ({ todo }: Todo) => (
-  <li className='Todo-Item'>
-    <input type='checkbox' defaultChecked={todo.isComplete}/>{todo.description}
+type Props = {
+  todo: Todo,
+  handleToggleTodo: (id: number) => void,
+};
+
+const TodoItem = ({ todo, handleToggleTodo }: Props) => (
+  <li>
+    <input onClick={handleToggleTodo(todo.id)} type='checkbox' defaultChecked={todo.isComplete}/>{todo.description}
   </li>
 );
 

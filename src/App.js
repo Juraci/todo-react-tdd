@@ -3,16 +3,13 @@ import logo from './logo.svg';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
-import { addTodo } from './lib/todoHelpers';
+import { addTodo, findById, toggleTodo, updateTodo } from './lib/todoHelpers';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      todos: [],
-      currentTodo: '',
-      errorMessage: '',
-    };
+  state = {
+    todos: [],
+    currentTodo: '',
+    errorMessage: '',
   }
 
   handleInputChange = (evt) => {
@@ -37,6 +34,13 @@ class App extends Component {
     this.setState({ errorMessage: 'Description is required'});
   }
 
+  handleToggleTodo = (id) => () => {
+    const currentTodos = this.state.todos;
+    const todo = findById(id, currentTodos);
+    const newTodo = toggleTodo(todo);
+    this.setState({ todos: updateTodo(currentTodos, newTodo)});
+  }
+
   render() {
     const submitHandler = this.state.currentTodo ? this.handleSubmit : this.handleEmptySubmit;
     const errorNode = this.state.errorMessage ? <div className='error'>{this.state.errorMessage}</div> : null;
@@ -54,7 +58,7 @@ class App extends Component {
             handleInputChange={this.handleInputChange}
           />
           {errorNode}
-          <TodoList todos={this.state.todos}/>
+          <TodoList todos={this.state.todos} handleToggleTodo={this.handleToggleTodo}/>
         </div>
       </div>
     );

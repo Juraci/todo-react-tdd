@@ -39,9 +39,10 @@ it('prevents the creation of an empty task', () => {
 
 it('allows for task completion', () => {
   const wrapper = mount(<App/>);
-  wrapper.find('.todo-description').simulate('input', { target: { value: 'Learn JSX' } });
+  const input = wrapper.find('.todo-description');
+  input.simulate('change', { target: { value: 'Learn JSX'}});
   wrapper.find('input[type="submit"]').simulate('submit');
   expect(wrapper.find('.Todo-Item').length).toBe(1);
-  wrapper.find('.Todo-Item input[type="checkbox"]').simulate('click');
-  expect(wrapper.find('.Todo-Item').prop('isComplete')).toBe(true);
+  wrapper.find('.Todo-Item input[type="checkbox"]').first().simulate('click');
+  expect(wrapper.find('.Todo-Item').prop('todo').isComplete).toEqual(true);
 });
