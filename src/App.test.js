@@ -10,11 +10,6 @@ const wait = (delay = 1000) => new Promise(resolve => {
   setTimeout(resolve, delay);
 });
 
-it('renders the title', () => {
-  const wrapper = mount(<App/>);
-  expect(wrapper.find(".App-title").text()).toEqual("React Todos");
-});
-
 it('starts with no taks', () => {
   const wrapper = mount(<App/>);
   expect(wrapper.find('.Todo-Item').length).toBe(0);
