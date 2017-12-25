@@ -4,6 +4,7 @@ import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
 import { addTodo, findById, toggleTodo, updateTodo } from './lib/todoHelpers';
+import { pipe } from './lib/utils';
 
 class App extends Component {
   state = {
@@ -35,10 +36,8 @@ class App extends Component {
   }
 
   handleToggleTodo = (id) => () => {
-    const currentTodos = this.state.todos;
-    const todo = findById(id, currentTodos);
-    const newTodo = toggleTodo(todo);
-    this.setState({ todos: updateTodo(currentTodos, newTodo)});
+    const newTodo = pipe(findById, toggleTodo)(id, this.state.todos);
+    this.setState({ todos: updateTodo(this.state.todos, newTodo)});
   }
 
   render() {
