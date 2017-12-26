@@ -3,12 +3,18 @@ import logo from './logo.svg';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
-import { addTodo, findById, toggleTodo, updateTodo } from './lib/todoHelpers';
+import {
+  addTodo,
+  findById,
+  toggleTodo,
+  updateTodo,
+  removeTodo,
+} from './lib/todoHelpers';
 import { pipe } from './lib/utils';
 
 class App extends Component {
   state = {
-    todos: [],
+    todos: this.props.todos || [],
     currentTodo: '',
     errorMessage: '',
   }
@@ -40,6 +46,12 @@ class App extends Component {
     this.setState({ todos: updateTodo(this.state.todos, newTodo)});
   }
 
+  handleRemoveTodo = (id) => (evt) => {
+    evt.preventDefault();
+    const updatedTodos = removeTodo(this.state.todos, id);
+    this.setState({ todos: updatedTodos });
+  }
+
   render() {
     const submitHandler = this.state.currentTodo ? this.handleSubmit : this.handleEmptySubmit;
     const errorNode = this.state.errorMessage ? <div className='error'>{this.state.errorMessage}</div> : null;
@@ -53,7 +65,11 @@ class App extends Component {
             handleInputChange={this.handleInputChange}
           />
           {errorNode}
-          <TodoList todos={this.state.todos} handleToggleTodo={this.handleToggleTodo}/>
+          <TodoList
+            todos={this.state.todos}
+            handleToggleTodo={this.handleToggleTodo}
+            handleRemoveTodo={this.handleRemoveTodo}
+          />
         </div>
       </div>
     );

@@ -4,11 +4,17 @@ import { Todo } from '../../types';
 type Props = {
   todo: Todo,
   handleToggleTodo: (id: number) => void,
+  handleRemoveTodo: (id: number) => void,
 };
 
-const TodoItem = ({ todo, handleToggleTodo }: Props) => (
+const TodoItem = ({ todo, handleToggleTodo, handleRemoveTodo }: Props) => (
   <li>
-    <input onClick={handleToggleTodo(todo.id)} type='checkbox' checked={todo.isComplete}/>{todo.description}
+    <a onClick={handleRemoveTodo(todo.id)} href="#" className="remove-item">X</a>
+    <input
+      onClick={handleToggleTodo(todo.id)}
+      type='checkbox'
+      checked={todo.isComplete}/>
+      {todo.description}
   </li>
 );
 

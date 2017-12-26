@@ -10,4 +10,10 @@ const updateTodo = (list, updatedItem) => {
   return list.slice();
 };
 
-export { addTodo, findById, toggleTodo, updateTodo };
+const removeTodo = (list, targetId) => {
+  const index = list.findIndex(item => item.id === targetId);
+  list.splice(index, 1);
+  return list.slice();
+};
+
+export { addTodo, findById, toggleTodo, updateTodo, removeTodo };
