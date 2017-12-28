@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import TodoForm from './components/TodoForm';
-import TodoList from './components/TodoList';
+import { TodoForm, TodoList } from './components/todo';
 import './App.css';
 import {
   addTodo,

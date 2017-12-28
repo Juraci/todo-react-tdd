@@ -1,5 +1,6 @@
+// @flow
 import React from 'react';
-import { Todo } from '../../types';
+import { Todo } from '../../../types';
 
 type Props = {
   todo: Todo,
@@ -7,7 +8,7 @@ type Props = {
   handleRemoveTodo: (id: number) => void,
 };
 
-const TodoItem = ({ todo, handleToggleTodo, handleRemoveTodo }: Props) => (
+export const TodoItem = ({ todo, handleToggleTodo, handleRemoveTodo }: Props) => (
   <li>
     <a onClick={handleRemoveTodo(todo.id)} href="#" className="remove-item">X</a>
     <input
@@ -17,5 +18,3 @@ const TodoItem = ({ todo, handleToggleTodo, handleRemoveTodo }: Props) => (
       {todo.description}
   </li>
 );
-
-export default TodoItem;

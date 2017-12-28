@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import TodoItem from '../TodoItem';
-import { TodoCollection } from '../../types';
+import { TodoItem } from '../TodoItem';
+import { TodoCollection } from '../../../types';
 
 type Props = {
   todos: TodoCollection,
@@ -9,7 +9,7 @@ type Props = {
   handleRemoveTodo: (id: number) => void,
 };
 
-const TodoList = ({ todos, handleToggleTodo, handleRemoveTodo }: Props) => (
+export const TodoList = ({ todos, handleToggleTodo, handleRemoveTodo }: Props) => (
   <div className='Todo-List'>
     <ul>
       {todos.map(todo =>
@@ -23,5 +23,3 @@ const TodoList = ({ todos, handleToggleTodo, handleRemoveTodo }: Props) => (
     </ul>
   </div>
 );
-
-export default TodoList;
