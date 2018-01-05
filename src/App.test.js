@@ -2,7 +2,7 @@ import React from 'react';
 import App from './App';
 import EnzymeSetup from '../configs/EnzymeSetup';
 import { mount } from  'enzyme';
-import TodoItem from './components/TodoItem';
+import { TodoItem } from './components/todo';
 
 EnzymeSetup();
 
