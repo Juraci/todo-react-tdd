@@ -50,3 +50,10 @@ it('allows for task removal', () => {
   wrapper.find('.remove-item').first().simulate('click');
   expect(wrapper.find('.Todo-Item').length).toEqual(0);
 });
+
+it('filters the completed tasks', () => {
+  const wrapper = mount(<App todos={[{ description: 'Learn JSX', isComplete: false, id: 1}]}/>);
+
+  wrapper.find('.filter-completed').first().simulate('click');
+  expect(wrapper.find('.Todo-Item').length).toEqual(0);
+});
